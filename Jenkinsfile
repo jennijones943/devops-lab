@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout from GitHub') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/jennijonesyadala/node-docker-app.git'
+                    url: 'https://github.com/jennijones943/node-docker-app.git'
             }
         }
 
@@ -20,20 +20,20 @@ pipeline {
             steps {
                 sh '''
                 docker build -t node-docker-app:${BUILD_NUMBER} .
-                docker tag node-docker-app:${BUILD_NUMBER} jennijonesyadala/node-docker-app:${BUILD_NUMBER}
+                docker tag node-docker-app:${BUILD_NUMBER} jennijones943/node-docker-app:${BUILD_NUMBER}
                 '''
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh 'docker push jennijonesyadala/node-docker-app:${BUILD_NUMBER}'
+                sh 'docker push jennijones943/node-docker-app:${BUILD_NUMBER}'
             }
         }
         
         stage('Create container') {
             steps {
-                sh 'docker run -d -p 3000:8080 jennijonesyadala/node-docker-app:${BUILD_NUMBER}'
+                sh 'docker run -d -p 3000:8080 jennijones943/node-docker-app:${BUILD_NUMBER}'
             }
         }
 
